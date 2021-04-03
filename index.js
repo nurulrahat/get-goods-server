@@ -1,7 +1,7 @@
 const express = require('express')
 const MongoClient = require('mongodb').MongoClient;
 const app = express()
-const port = process.env.PORT||5000
+const port =5000;
 const cors= require('cors')
 const bodyParser = require('body-parser')
 require('dotenv').config()
@@ -64,6 +64,7 @@ client.connect(err => {
       res.send(result.insertedCount>0)
       console.log("inserted count",result)
     })
+  })
   // client.close();
 });
 
@@ -74,6 +75,4 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+app.listen(process.env.PORT || port)
