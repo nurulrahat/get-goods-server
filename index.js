@@ -57,12 +57,19 @@ client.connect(err => {
 
 //orders database 
 
-  app.post("/insertOrder",(req, res)=>{
+  app.post("/insertorder",(req, res)=>{
     const product =req.body;
     orderCollection.insertOne(product)
     .then(result=>{
       res.send(result.insertedCount>0)
       console.log("inserted count",result)
+    })
+  })
+
+  app.get("/orderdata",(req, res) =>{
+    orderCollection.find({email:req.query.eml})
+    .toArray((err, items) =>{
+      res.send(items)
     })
   })
   // client.close();
